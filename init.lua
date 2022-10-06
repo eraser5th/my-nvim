@@ -1,5 +1,5 @@
 local check_neovim_version = function()
-  if vim.fn.has("nvim-0.7") ~= 1 then
+  if vim.fn.has("nvim-0.7.2") ~= 1 then
     vim.notify("Please upgrade your Neovim to v0.7+.", vim.log.levels.WARN)
     vim.wait(5000, function()
       return false

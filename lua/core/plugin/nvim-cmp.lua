@@ -45,6 +45,7 @@ M.setup = function()
     }),
   })
 
+  --[[
   cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
@@ -60,6 +61,7 @@ M.setup = function()
       { name = "cmdline" },
     }),
   })
+  ]]
 end
 
 return M

@@ -1,5 +1,16 @@
 local M = {}
 
+local set_format_on_save = function(enable)
+  if enable then
+    vim.api.nvim_create_augroup("FormatOnSave", {})
+    vim.api.nvim_create_autocmd("BufWritePost", {
+      command = "FormatWrite",
+      pattern = "*",
+      group = "FormatOnSave",
+    })
+  end
+end
+
 M.setup = function()
   require("formatter").setup({
     logging = true,
@@ -36,12 +47,9 @@ M.setup = function()
     },
   })
 
-  vim.api.nvim_create_augroup("FormatOnSave", {})
-  vim.api.nvim_create_autocmd("BufWritePost", {
-    command = "FormatWrite",
-    pattern = "*",
-    group = "FormatOnSave",
-  })
+  -- if you don't like format on save
+  -- please change false
+  set_format_on_save(true)
 end
 
 return M

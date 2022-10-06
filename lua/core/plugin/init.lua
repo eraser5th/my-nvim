@@ -2,12 +2,6 @@ local packer = require("packer")
 
 local M = {}
 
-local init_packer = function()
-  packer.init({
-    clone_timeout = 500, -- Timeout, in seconds, for git clones
-  })
-end
-
 local startup_packer = function()
   packer.startup(function(use)
     use("wbthomason/packer.nvim")
@@ -138,14 +132,6 @@ local startup_packer = function()
     })
 
     use({
-      "glepnir/lspsaga.nvim",
-      branch = "main",
-      config = function()
-        require("core.plugin.lspsaga").setup()
-      end,
-    })
-
-    use({
       "j-hui/fidget.nvim",
       config = function()
         require("fidget").setup({})
@@ -218,13 +204,24 @@ local startup_packer = function()
         require("core.plugin.formatter").setup()
       end,
     })
+
+    use({
+      "lukas-reineke/indent-blankline.nvim",
+      config = function()
+        require("core.plugin.indent-blankline")
+      end,
+    })
+
+    use({
+      "folke/lsp-colors.nvim",
+      config = function()
+        require("core.plugin.lsp-colors").setup()
+      end,
+    })
   end)
 end
 
-M.setup = function()
-  init_packer()
-  startup_packer()
-
+local load_packer_compiled = function()
   local compile_path = vim.fn.stdpath("config") .. "/plugin/packer_compiled.lua"
   local packer_compiled, _ = loadfile(compile_path)
 
@@ -236,6 +233,11 @@ M.setup = function()
       { ":PackerSync", "Title" },
     }, false, {})
   end
+end
+
+M.setup = function()
+  startup_packer()
+  load_packer_compiled()
 end
 
 return M

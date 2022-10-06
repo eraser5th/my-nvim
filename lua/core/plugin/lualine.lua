@@ -22,7 +22,7 @@ M.setup = function()
       section_separators = { left = "", right = "" },
       disabled_filetypes = {
         statusline = { "NvimTree" },
-        winbar = {},
+        winbar = { "NvimTree", "Terminal" },
       },
       ignore_focus = {},
       always_divide_middle = true,
@@ -35,23 +35,50 @@ M.setup = function()
     },
     sections = {
       lualine_a = { "mode" },
-      lualine_c = { "filename" },
       lualine_b = { "branch", "diff", lsp_provider, "diagnostics" },
-      lualine_x = { "encoding", "fileformat", "filetype" },
+      lualine_c = {},
+      lualine_x = {},
       lualine_y = {},
       lualine_z = { "progress", "location" },
     },
     inactive_sections = {
       lualine_a = {},
       lualine_b = {},
-      lualine_c = { "filename" },
+      lualine_c = {},
       lualine_x = { "location" },
       lualine_y = {},
       lualine_z = {},
     },
-    tabline = {},
-    winbar = {},
-    inactive_winbar = {},
+    tabline = {
+      lualine_a = {
+        {
+          "tabs",
+          max_length = vim.o.columns,
+          mode = 2, -- 0: Shows tab_nr, 1: Shos tab_name, 2: Shows tab_nr + tab_name
+        },
+      },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {},
+    },
+    winbar = {
+      lualine_a = { "filename" },
+      lualine_b = {},
+      lualine_c = {},
+      lualine_x = {},
+      lualine_y = { "encoding", "fileformat" },
+      lualine_z = { "filetype" },
+    },
+    inactive_winbar = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = { "filename" },
+      lualine_x = {},
+      lualine_y = {},
+      lualine_z = {},
+    },
     extensions = {},
   })
 end
